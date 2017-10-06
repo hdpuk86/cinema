@@ -67,5 +67,8 @@ customer1 = Customer.new({
                     })
                     ticket4.save()
 
+                    ticket2.film_id = film2.id
+                    ticket2.update()
+
                     binding.pry()
                     nil
