@@ -18,6 +18,36 @@ attr_reader :id
     @id = result[0]['id'].to_i
   end
 
+  def delete()
+    sql = "DELETE FROM films WHERE id = $1;"
+    values = [@id]
+    SqlRunner.run(sql, "delete_film", values)
+  end
+
+  def self.all()
+    sql = "SELECT * FROM films;"
+    values = []
+    results = SqlRunner.run(sql, "show_all_films", values)
+    return results.map {|film| Film.new(film)}
+  end
+
+  def update()
+    sql = "UPDATE films SET (title, price) = ($1, $2) WHERE id = $3;"
+    values = [@title, @price, @id]
+    SqlRunner.run(sql, "update_film", values)
+  end
+
+  def customers()
+    sql = "SELECT customers.*
+    FROM customers
+    INNER JOIN tickets
+    ON tickets.customer_id = customers.id
+    WHERE film_id = $1;"
+    values = [@id]
+    results = SqlRunner.run(sql, "show_customers_for_film", values)
+    return results.map {|customer| Customer.new(customer)}
+  end
+
   def self.delete_all()
     sql = "DELETE FROM films;"
     values = []

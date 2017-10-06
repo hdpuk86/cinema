@@ -24,5 +24,7 @@ attr_reader :id
     SqlRunner.run(sql, "delete_all_tickets", values)
   end
 
+  
+
 
 end
