@@ -62,4 +62,13 @@ attr_reader :id
     return tickets.length()
   end
 
+  def most_popular_screening()
+    sql = "SELECT screening_id FROM tickets WHERE film_id = $1
+    GROUP BY screening_id
+    ORDER BY COUNT(screening_id) DESC;"
+    values = [@id]
+    result = SqlRunner.run(sql, "find_most_popular", values)
+    screening = result.first()
+  end
+
 end
