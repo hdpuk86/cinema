@@ -53,5 +53,23 @@ attr_reader :id
      return results.map {|film| Film.new(film)}
   end
 
+  def count_tickets()
+    sql = "SELECT * FROM tickets WHERE customer_id = $1;"
+    values = [@id]
+    result = SqlRunner.run(sql, "count_tickets_for_customer", values)
+    tickets = result.map {|ticket| Ticket.new(ticket)}
+    return tickets.length()
+  end
+
+  def buy_ticket(film)
+    if @funds >= film.price()
+      sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2);"
+      values = [@id, film.id]
+      SqlRunner.run(sql, "buy_ticket", values)
+      @funds -= film.price()
+      return "success"
+    end
+    return "error"
+  end
 
 end

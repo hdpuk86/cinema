@@ -3,7 +3,9 @@ require 'pry-byebug'
 require_relative '../models/customer'
 require_relative '../models/film'
 require_relative '../models/ticket'
+require_relative '../models/screening'
 
+Screening.delete_all()
 Ticket.delete_all()
 Customer.delete_all()
 Film.delete_all()
@@ -24,7 +26,7 @@ customer1 = Customer.new({
       })
       customer3.save()
 
-      customer2.funds = 100
+      customer2.funds = 30
       customer2.update()
 
       film1 = Film.new({
@@ -46,6 +48,12 @@ customer1 = Customer.new({
             film3.price = 5
             film3.update()
 
+            film4 = Film.new({
+              'title' => 'It',
+              'price' => 60
+              })
+              film4.save()
+
             ticket1 = Ticket.new({
               'customer_id' => customer1.id(),
               'film_id' => film1.id
@@ -66,9 +74,40 @@ customer1 = Customer.new({
                     'film_id' => film2.id
                     })
                     ticket4.save()
+                    ticket5 = Ticket.new({
+                      'customer_id' => customer1.id(),
+                      'film_id' => film2.id
+                      })
+                      ticket5.save()
 
                     ticket2.film_id = film2.id
                     ticket2.update()
+
+                    screening1 = Screening.new({
+                      'film_id' => film1.id,
+                      'show_time' => '14:00'
+                      })
+                      screening1.save()
+                      screening2 = Screening.new({
+                        'film_id' => film2.id,
+                        'show_time' => '14:00'
+                        })
+                        screening2.save()
+                        screening3 = Screening.new({
+                          'film_id' => film2.id,
+                          'show_time' => '18:00'
+                          })
+                          screening3.save()
+                          screening4 = Screening.new({
+                            'film_id' => film3.id,
+                            'show_time' => '20:00'
+                            })
+                            screening4.save()
+                            screening5 = Screening.new({
+                              'film_id' => film2.id,
+                              'show_time' => '00:00'
+                              })
+                              screening5.save()
 
                     binding.pry()
                     nil

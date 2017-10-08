@@ -54,4 +54,12 @@ attr_reader :id
     SqlRunner.run(sql, "delete_all_films", values)
   end
 
+  def count_tickets()
+    sql = "SELECT * FROM tickets WHERE film_id = $1;"
+    values = [@id]
+    results = SqlRunner.run(sql, "count_customers_for_film", values)
+    tickets = results.map {|ticket| Ticket.new(ticket)}
+    return tickets.length()
+  end
+
 end
