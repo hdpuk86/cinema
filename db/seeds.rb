@@ -56,27 +56,32 @@ customer1 = Customer.new({
 
               screening1 = Screening.new({
                 'film_id' => film1.id,
-                'show_time' => '14:00'
+                'show_time' => '14:00',
+                'number_of_tickets' => 5
                 })
                 screening1.save()
                 screening2 = Screening.new({
                   'film_id' => film2.id,
-                  'show_time' => '14:00'
+                  'show_time' => '14:00',
+                  'number_of_tickets' => 5
                   })
                   screening2.save()
                   screening3 = Screening.new({
                     'film_id' => film2.id,
-                    'show_time' => '18:00'
+                    'show_time' => '18:00',
+                    'number_of_tickets' => 5
                     })
                     screening3.save()
                     screening4 = Screening.new({
                       'film_id' => film3.id,
-                      'show_time' => '20:00'
+                      'show_time' => '20:00',
+                      'number_of_tickets' => 5
                       })
                       screening4.save()
                       screening5 = Screening.new({
                         'film_id' => film4.id,
-                        'show_time' => '00:00'
+                        'show_time' => '00:00',
+                        'number_of_tickets' => 0
                         })
                         screening5.save()
 

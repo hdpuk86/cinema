@@ -2,13 +2,14 @@ require_relative '../db/sql_runner'
 
 class Screening
 
-  attr_accessor :film_id, :show_time
+  attr_accessor :film_id, :show_time, :number_of_tickets
   attr_reader :id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @film_id = options['film_id'].to_i
     @show_time = options['show_time']
+    @number_of_tickets = options['number_of_tickets'].to_i
   end
 
   def save()

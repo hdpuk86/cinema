@@ -61,13 +61,18 @@ attr_reader :id
     return tickets.length()
   end
 
-  def buy_ticket(film)
-    if @funds >= film.price()
-      sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2);"
-      values = [@id, film.id]
-      SqlRunner.run(sql, "buy_ticket", values)
-      @funds -= film.price()
-      return "success"
+  def buy_ticket(film, screening)
+    if screening.number_of_tickets > 0
+      if @funds >= film.price()
+        sql = "INSERT INTO tickets (customer_id, screening_id, film_id) VALUES ($1, $2, $3);"
+        values = [@id, screening.id, film.id]
+        SqlRunner.run(sql, "buy_ticket", values)
+        @funds -= film.price()
+        screening.number_of_tickets -= 1
+        return "success"
+      end
+    else
+      return "sold out"
     end
     return "error"
   end

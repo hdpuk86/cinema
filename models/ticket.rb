@@ -44,6 +44,4 @@ attr_reader :id
     SqlRunner.run(sql, "update_ticket", values)
   end
 
-
-
 end
