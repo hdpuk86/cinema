@@ -32,4 +32,11 @@ class Screening
     SqlRunner.run(sql, "delete_all_screenings", values)
   end
 
+  def self.find(id)
+    sql = "SELECT * FROM screenings WHERE id = $1;"
+    values = [id]
+    result = SqlRunner.run(sql, "find_screening_by_id", values)
+    return result[0]
+  end
+
 end
